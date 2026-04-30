@@ -73,11 +73,9 @@ export class PostFormComponent {
     });
   }
 
-  // Si el formulario no tiene un createdAt válido, se asigna la fecha actual
-  private refreshCreatedAtIfNew() {
-    if (!this.isEditMode) {
-      this.postForm.patchValue({ createdAt: new Date() });
-    }
+  // Actualiza createdAt al guardar, incluso en edición
+  private refreshCreatedAt() {
+    this.postForm.patchValue({ createdAt: new Date() });
   }
 
   private buildPostData(): Omit<Post, 'id'> {
@@ -86,7 +84,7 @@ export class PostFormComponent {
 
   // Guarda la publicación como borrador o actualiza el borrador existente
   saveDraft() {
-    this.refreshCreatedAtIfNew();
+    this.refreshCreatedAt();
     if (this.postForm.invalid) {
       this.postForm.markAllAsTouched();
       return;
@@ -108,7 +106,7 @@ export class PostFormComponent {
 
   // Publica la publicación o actualiza la publicación existente
   publish() {
-    this.refreshCreatedAtIfNew();
+    this.refreshCreatedAt();
     if (this.postForm.invalid) {
       this.postForm.markAllAsTouched();
       return;
