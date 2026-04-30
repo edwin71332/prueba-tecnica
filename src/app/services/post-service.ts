@@ -72,7 +72,7 @@ export class PostService {
           createdAt: new Date(post.createdAt),
         }));
       } catch (error) {
-        console.error('Error loading posts from localStorage:', error);
+        console.error('Error al cargar publicaciones desde localStorage:', error);
         this.posts = [];
       }
     } else {
@@ -102,7 +102,7 @@ export class PostService {
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.posts));
     } catch (error) {
-      console.error('Error saving posts to localStorage:', error);
+      console.error('Error al guardar publicaciones en localStorage:', error);
     }
   }
 }
