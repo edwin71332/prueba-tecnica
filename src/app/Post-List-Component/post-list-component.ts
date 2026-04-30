@@ -32,9 +32,9 @@ export class PostListComponent {
     return this.posts.filter(post => post.status === this.statusFilter);
   }
 
-   setFilter(filter: 'all' | 'draft' | 'published') {
-  this.statusFilter = filter;
-}
+  setFilter(filter: 'all' | 'draft' | 'published') {
+    this.statusFilter = filter;
+  }
 
   // Eliminar una publicación
   deletePost(id: number): void {
@@ -44,6 +44,23 @@ export class PostListComponent {
 
     this.postService.deletePost(id);
     this.loadPosts();
+  }
+
+  onFilterChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    // Forzamos el tipo para que coincida con tu definición
+    this.statusFilter = selectElement.value as 'all' | 'draft' | 'published';
+    this.applyFilter();
+  }
+
+  applyFilter(): void {
+    const allPosts = this.postService.getPosts();
+
+    if (this.statusFilter === 'all') {
+      this.posts = allPosts;
+    } else {
+      this.posts = allPosts.filter(post => post.status === this.statusFilter);
+    }
   }
 
 }
