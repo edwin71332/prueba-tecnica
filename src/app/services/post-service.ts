@@ -29,22 +29,27 @@ export class PostService {
     },
   ];
 
+  // Obtener todas las publicaciones
   getPosts(): Post[] {
     return this.posts;
   }
 
+  // Obtener una publicación por ID
+  getPost(id: number): Post | undefined {
+    return this.posts.find(post => post.id === id);
+  }
 
-
-//crear el post desde el formulario, asignando un ID único y la fecha de creación automáticamente
+  // Crear una nueva publicación
   createPost(post: Omit<Post, 'id'>): void {
     const newPost: Post = {
       id: this.generateId(),
       ...post,
-      createdAt: new Date(),  
+      createdAt: new Date(),
     };
     this.posts.push(newPost);
   }
 
+  // Actualizar una publicación existente
   updatePost(id: number, updatedPost: Partial<Post>): void {
     const index = this.posts.findIndex(post => post.id === id);
     if (index === -1) {
@@ -53,10 +58,12 @@ export class PostService {
     this.posts[index] = { ...this.posts[index], ...updatedPost };
   }
 
+  // Eliminar una publicación
   deletePost(id: number): void {
     this.posts = this.posts.filter(post => post.id !== id);
   }
 
+  // Generar un nuevo ID para una publicación 
   private generateId(): number {
     return this.posts.length ? Math.max(...this.posts.map(post => post.id)) + 1 : 1;
   }
