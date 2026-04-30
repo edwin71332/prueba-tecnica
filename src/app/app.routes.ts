@@ -6,4 +6,5 @@ export const routes: Routes = [
   { path: '', redirectTo: '/posts', pathMatch: 'full' },
   { path: 'posts', component: PostListComponent },
   { path: 'posts/new', component: PostFormComponent },
+  { path: 'posts/:id', component: PostFormComponent },
  ];
