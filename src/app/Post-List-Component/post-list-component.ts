@@ -13,6 +13,7 @@ import { routes } from '../app.routes';
 })
 export class PostListComponent {
   posts: Post[] = [];
+  statusFilter: 'all' | 'draft' | 'published' = 'all';
 
   constructor(private postService: PostService) {
     this.loadPosts();
@@ -22,6 +23,18 @@ export class PostListComponent {
   loadPosts(): void {
     this.posts = this.postService.getPosts();
   }
+
+  // Filtrar las publicaciones por estado
+  filterPosts(): Post[] {
+    if (this.statusFilter === 'all') {
+      return this.posts;
+    }
+    return this.posts.filter(post => post.status === this.statusFilter);
+  }
+
+   setFilter(filter: 'all' | 'draft' | 'published') {
+  this.statusFilter = filter;
+}
 
   // Eliminar una publicación
   deletePost(id: number): void {
