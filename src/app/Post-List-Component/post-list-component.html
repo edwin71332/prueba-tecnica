@@ -1,5 +1,7 @@
 <h2>Lista de Publicaciones</h2>
 <button [routerLink]="['/posts/new']">Crear Nueva Publicación</button>
+<button [routerLink]="['/rick-morty']">Ver Character</button>
+
 <div class="filter-container">
     <label for="status">Filtrar por estado: </label>
     <select id="status" (change)="onFilterChange($event)">
@@ -9,7 +11,6 @@
     </select>
 </div>
 
-<!-- Tu tabla sigue igual, iterando sobre this.posts -->
 <table>
     <thead>
         <tr>
@@ -20,7 +21,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let post of filterPosts()">
+        @for (post of filterPosts(); track post.id) {
+        <tr>
             <td>{{ post.title }}</td>
             <td>{{ post.status === 'published' ? 'Publicado' : 'Borrador' }}</td>
             <td>{{ post.createdAt | date:'short' }}</td>
@@ -29,6 +31,7 @@
                 <button (click)="deletePost(post.id)">Eliminar</button>
             </td>
         </tr>
+        }
     </tbody>
 
 </table>

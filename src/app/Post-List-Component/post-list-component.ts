@@ -32,6 +32,7 @@ export class PostListComponent {
     return this.posts.filter(post => post.status === this.statusFilter);
   }
 
+  // Cambiar el filtro de estado
   setFilter(filter: 'all' | 'draft' | 'published') {
     this.statusFilter = filter;
   }
@@ -46,9 +47,9 @@ export class PostListComponent {
     this.loadPosts();
   }
 
+  // Manejar el cambio en el filtro de estado
   onFilterChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    // Forzamos el tipo para que coincida con tu definición
     this.statusFilter = selectElement.value as 'all' | 'draft' | 'published';
     this.applyFilter();
   }
