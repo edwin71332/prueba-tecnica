@@ -1,0 +1,25 @@
+<h2>Lista de personajes</h2>
+<button [routerLink]="['/posts']">ver Post</button>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>status</th>
+            <th>species</th>
+            <th>gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (character of characters$ | async; track character.id) {
+        <tr>
+            <td>{{ character.name }}</td>
+            <td>{{ character.status }}</td>
+            <td>{{ character.species }}</td>
+            <td>{{ character.gender }}</td>
+        </tr>
+        }
+    </tbody>
+
+</table>
