@@ -1,5 +1,5 @@
 <section class="post-form">
-  <h2>Crear publicación</h2>
+  <h2>{{ isEditMode ? 'Editar publicación' : 'Crear publicación' }}</h2>
 
   <form [formGroup]="postForm">
     <label for="title">Título</label>
